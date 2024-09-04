@@ -1,0 +1,39 @@
+﻿@page
+@model net8Test.Pages.SignInModel
+@{
+    <form id="signinForm" method="post">
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    @if (Model.ErrorMessages.Count > 0)
+    {
+        <ul class="text-danger">
+            @foreach (var error in Model.ErrorMessages)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    }
+    @if (Model.ErrorMessage != "")
+    {
+        <ul class="text-danger">
+            <li>@Model.ErrorMessage</li>
+        </ul>
+    }
+    <script>
+        document.getElementById("signinForm").addEventListener("submit", function (event) {
+            const email = document.getElementById("email").value;
+            if (!email) {
+                event.preventDefault();
+                alert("Please enter a valid email.");
+            }
+        });
+    </script>
+}
